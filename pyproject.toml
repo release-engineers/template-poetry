@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "template"
+version = "1.0.0"
+description = ""
+authors = ["SkPhilipp <philipp@release-engineers.com>"]
+readme = "README.md"
+packages = [{ include = "template" }]
+license = "SSPL-1.0"
+classifiers = ["Private :: Do not Upload"]
+
+[tool.poetry.scripts]
+template = "template.__main__:main"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fire = "^0.5.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
