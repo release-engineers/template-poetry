@@ -1,15 +1,15 @@
 [tool.poetry]
-name = "template"
+name = "{{cookiecutter.repo_name}}"
 version = "1.0.0"
 description = ""
-authors = ["SkPhilipp <philipp@release-engineers.com>"]
+authors = ["{{cookiecutter.email}}"]
 readme = "README.md"
-packages = [{ include = "template" }]
+packages = [{ include = "{{cookiecutter.repo_name}}" }]
 license = "SSPL-1.0"
 classifiers = ["Private :: Do not Upload"]
 
 [tool.poetry.scripts]
-template = "template.__main__:main"
+{{cookiecutter.repo_name}} = "{{cookiecutter.repo_name}}.__main__:main"
 
 [tool.poetry.dependencies]
 python = "^3.11"

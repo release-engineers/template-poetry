@@ -14,14 +14,14 @@ if [[ $command == "build" ]]; then
     poetry install --sync
     poetry build --format wheel
     version=$(poetry version --short)
-    docker build --tag "template:${version}" --file Dockerfile .
+    docker build --tag "{{cookiecutter.repo_name}}:${version}" --file Dockerfile .
     exit 0
 fi
 
 if [[ $command == "run" ]]; then
     version=$(poetry version --short)
     shift
-    docker run --rm --publish 8000:8000 "template:${version}" "$@"
+    docker run --rm --publish 8000:8000 "{{cookiecutter.repo_name}}:${version}" "$@"
     exit 0
 fi
 

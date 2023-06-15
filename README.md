@@ -1,26 +1,9 @@
-# template
+# poetry-template
 
-Requires:
+`cookiecutter` template for Python projects using Poetry.
 
-- Docker
-- [Poetry](https://python-poetry.org/)
-
-Technologies:
-
-- Python
-- Docker
-- [Poetry](https://python-poetry.org/)
-
-## Build
-
-To build a Docker image tagged `template:${version}` (where `${version}` is defined by `pyproject.toml`) run the following;
+## Usage
 
 ```bash
-./app.sh build
-```
-
-## Run
-
-```bash
-./app.sh run <args>
+cookiecutter gh:SkPhilipp/poetry-template
 ```

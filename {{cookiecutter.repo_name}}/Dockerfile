@@ -11,4 +11,4 @@ FROM python:3.11-alpine
 ENV PYTHONPATH=/app:$PYTHONPATH
 COPY --from=staging /app/ /app/
 
-ENTRYPOINT ["python", "-m", "template"]
+ENTRYPOINT ["python", "-m", "{{cookiecutter.repo_name}}"]
