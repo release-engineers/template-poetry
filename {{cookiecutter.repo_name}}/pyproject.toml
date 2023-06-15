@@ -2,7 +2,7 @@
 name = "{{cookiecutter.repo_name}}"
 version = "1.0.0"
 description = ""
-authors = ["{{cookiecutter.email}}"]
+authors = ["{{cookiecutter.name}} <{{cookiecutter.email}}>"]
 readme = "README.md"
 packages = [{ include = "{{cookiecutter.repo_name}}" }]
 license = "SSPL-1.0"
