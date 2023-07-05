@@ -4,7 +4,7 @@
   "repo_name": "",
   "github_container_registry_publish": false,
   "github_container_registry_owner": "",
-  "pipy_publish": false,
+  "pypi_publish": false,
   "dockerhub_publish": false,
   "dockerhub_owner": ""
 }
