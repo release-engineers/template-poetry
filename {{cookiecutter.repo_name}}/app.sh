@@ -43,6 +43,7 @@ if [[ $command == "release" ]]; then
   git add pyproject.toml
   git commit --all --message "${release_type} release ${version}"
   git push --tags
+  exit 0
 fi
 
 {%- if cookiecutter.pypi_publish %}
@@ -86,7 +87,6 @@ echo "Commands:"
 echo "  build            -- build the docker image containing the local virtualenv and the application"
 echo "  run              -- run the docker image associated with the current version, passing any arguments"
 echo "  release <type>   -- tag the current revision and bump the version in pyproject.toml"
-echo "  publish-git      -- tag the current revision with the current version and push to git"
 {%- if cookiecutter.pypi_publish %}
 echo "  publish-pipy     -- publish the current built artifact to pipy under the current version"
 {%- endif %}
