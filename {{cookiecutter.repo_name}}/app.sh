@@ -70,7 +70,7 @@ if [[ $command == "publish-dockerio" ]]; then
   debug
   version=$(poetry version --short)
   image_tag_local="{{cookiecutter.repo_name}}:${version}"
-  image_tag_dockerhub="{{cookiecutter.dockerhub_username}}/${image_tag}"
+  image_tag_dockerhub="{{cookiecutter.dockerhub_owner}}/${image_tag}"
   docker tag "${image_tag}" "${image_tag_dockerhub}"
   docker push "${image_tag_dockerhub}"
   exit 0
