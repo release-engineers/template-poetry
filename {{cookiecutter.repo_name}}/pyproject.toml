@@ -9,7 +9,7 @@ license = "SSPL-1.0"
 classifiers = ["Private :: Do not Upload"]
 
 [tool.poetry.scripts]
-{{cookiecutter.repo_name}} = "{{cookiecutter.repo_name}}.__main__:main"
+"{{cookiecutter.repo_name}}" = "{{cookiecutter.repo_name}}.__main__:main"
 
 [tool.poetry.dependencies]
 python = "^3.11"

@@ -8,28 +8,93 @@
 set -e
 set -o pipefail
 
-command=$1
+function debug() {
+  trap 'printf -- "-- \033[0;36m${BASH_COMMAND}\033[0m\n"' DEBUG
+}
 
 if [[ $command == "build" ]]; then
-    poetry install --sync
-    poetry build --format wheel
-    version=$(poetry version --short)
-    docker build --tag "{{cookiecutter.repo_name}}:${version}" --file Dockerfile .
-    exit 0
+  debug
+  poetry install --sync
+  poetry build --format wheel
+  version=$(poetry version --short)
+  docker build --tag "{{cookiecutter.repo_name}}:${version}" --file Dockerfile .
+  exit 0
 fi
 
 if [[ $command == "run" ]]; then
-    version=$(poetry version --short)
-    shift
-    docker run --rm --publish 8000:8000 "{{cookiecutter.repo_name}}:${version}" "$@"
-    exit 0
+  debug
+  version=$(poetry version --short)
+  shift
+  docker run --rm --tty --interactive --publish 8000:8000 "{{cookiecutter.repo_name}}:${version}" "$@"
+  exit 0
 fi
+
+if [[ $command == "release" ]]; then
+  debug
+  shift
+  release_type=$1
+  if [[ -z $release_type ]]; then
+    echo "Usage: $0 release <major|minor|patch>"
+    exit 1
+  fi
+  version=$(poetry version --short)
+  git tag "v${version}"
+  poetry version "${release_type}"
+  git add pyproject.toml
+  git commit --all --message "${release_type} release ${version}"
+  git push --tags
+fi
+
+{%- if cookiecutter.pypi_publish %}
+if [[ $command == "publish-pypi" ]]; then
+  debug
+  poetry publish
+  exit 0
+fi
+{%- endif %}
+
+{%- if cookiecutter.github_container_registry_publish %}
+if [[ $command == "publish-ghcr" ]]; then
+  debug
+  version=$(poetry version --short)
+  image_tag_local="{{cookiecutter.repo_name}}:${version}"
+  image_tag_github="ghcr.io/{{cookiecutter.github_container_registry_owner}}/${image_tag}"
+  docker tag "${image_tag}" "${image_tag_github}"
+  docker push "${image_tag_github}"
+  exit 0
+fi
+{%- endif %}
+
+{%- if cookiecutter.dockerhub_publish %}
+if [[ $command == "publish-dockerio" ]]; then
+  debug
+  version=$(poetry version --short)
+  image_tag_local="{{cookiecutter.repo_name}}:${version}"
+  image_tag_dockerhub="{{cookiecutter.dockerhub_username}}/${image_tag}"
+  docker tag "${image_tag}" "${image_tag_dockerhub}"
+  docker push "${image_tag_dockerhub}"
+  exit 0
+fi
+{%- endif %}
 
 if [[ -z $command ]]; then
   echo "Unknown command: ${command}"
 fi
+
 echo "Usage: $0 <command>"
 echo "Commands:"
-echo "  build -- build the docker image containing the local virtualenv and the application"
-echo "  run   -- run the docker image associated with the current version, passing any arguments"
+echo "  build            -- build the docker image containing the local virtualenv and the application"
+echo "  run              -- run the docker image associated with the current version, passing any arguments"
+echo "  release <type>   -- tag the current revision and bump the version in pyproject.toml"
+echo "  publish-git      -- tag the current revision with the current version and push to git"
+{%- if cookiecutter.pypi_publish %}
+echo "  publish-pipy     -- publish the current built artifact to pipy under the current version"
+{%- endif %}
+{%- if cookiecutter.github_container_registry_publish %}
+echo "  publish-ghcr     -- publish the current built Docker image to the GitHub container registry"
+{%- endif %}
+{%- if cookiecutter.dockerhub_publish %}
+echo "  publish-dockerio -- publish the current built Docker image to Docker Hub"
+{%- endif %}
+
 exit 1

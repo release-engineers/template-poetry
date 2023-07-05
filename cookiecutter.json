@@ -1,5 +1,10 @@
 {
   "name": "Anonymous",
   "email": "anonymous@example.com",
-  "repo_name": ""
+  "repo_name": "",
+  "github_container_registry_publish": false,
+  "github_container_registry_owner": "",
+  "pipy_publish": false,
+  "dockerhub_publish": false,
+  "dockerhub_owner": ""
 }
