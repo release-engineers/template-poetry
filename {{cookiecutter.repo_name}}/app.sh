@@ -52,6 +52,8 @@ fi
 {% if cookiecutter.pypi_publish %}
 if [[ $command == "publish-pypi" ]]; then
   debug
+  # configure token
+  poetry config pypi-token.pypi "${PYPI_TOKEN}"
   poetry publish
   exit 0
 fi
