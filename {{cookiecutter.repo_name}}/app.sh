@@ -32,13 +32,13 @@ if [[ $command == "run" ]]; then
 fi
 
 if [[ $command == "release" ]]; then
-  debug
   shift
   release_type=$1
   if [[ -z $release_type ]]; then
     echo "Usage: $0 release <major|minor|patch>"
     exit 1
   fi
+  debug
   version=$(poetry version --short)
   git tag "v${version}"
   poetry version "${release_type}"
