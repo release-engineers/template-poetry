@@ -2,7 +2,8 @@
 
 ## Development
 
-This is a Python Poetry project. See [Poetry](https://python-poetry.org/) for more information.
+This is a Python Poetry project using [Fire](https://github.com/google/python-fire).
+See [Poetry](https://python-poetry.org/) for more information.
 
 Development requires:
 

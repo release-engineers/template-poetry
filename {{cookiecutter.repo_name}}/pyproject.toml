@@ -15,6 +15,9 @@ classifiers = ["Private :: Do not Upload"]
 python = "^3.11"
 fire = "^0.5.0"
 
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.3.2"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
