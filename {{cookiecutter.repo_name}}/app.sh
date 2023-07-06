@@ -61,8 +61,8 @@ if [[ $command == "publish-ghcr" ]]; then
   debug
   version=$(poetry version --short)
   image_tag_local="{{cookiecutter.repo_name}}:${version}"
-  image_tag_github="ghcr.io/{{cookiecutter.github_container_registry_owner}}/${image_tag}"
-  docker tag "${image_tag}" "${image_tag_github}"
+  image_tag_github="ghcr.io/{{cookiecutter.github_container_registry_owner}}/${image_tag_local}"
+  docker tag "${image_tag_local}" "${image_tag_github}"
   docker push "${image_tag_github}"
   exit 0
 fi
@@ -73,8 +73,8 @@ if [[ $command == "publish-dockerio" ]]; then
   debug
   version=$(poetry version --short)
   image_tag_local="{{cookiecutter.repo_name}}:${version}"
-  image_tag_dockerhub="{{cookiecutter.dockerhub_owner}}/${image_tag}"
-  docker tag "${image_tag}" "${image_tag_dockerhub}"
+  image_tag_dockerhub="{{cookiecutter.dockerhub_owner}}/${image_tag_local}"
+  docker tag "${image_tag_local}" "${image_tag_dockerhub}"
   docker push "${image_tag_dockerhub}"
   exit 0
 fi
