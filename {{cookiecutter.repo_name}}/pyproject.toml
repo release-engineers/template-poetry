@@ -4,7 +4,7 @@ version = "1.0.0"
 description = ""
 authors = ["{{cookiecutter.name}} <{{cookiecutter.email}}>"]
 readme = "README.md"
-packages = [{ include = "{{cookiecutter.repo_name}}" }]
+packages = [{ include = "{{cookiecutter.package_name}}" }]
 license = "SSPL-1.0"
 classifiers = ["Private :: Do not Upload"]
 
