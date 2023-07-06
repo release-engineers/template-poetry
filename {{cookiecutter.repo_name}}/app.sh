@@ -49,7 +49,6 @@ if [[ $command == "release" ]]; then
   exit 0
 fi
 
-{% if cookiecutter.pypi_publish %}
 if [[ $command == "publish-pypi" ]]; then
   debug
   # configure token
@@ -57,9 +56,7 @@ if [[ $command == "publish-pypi" ]]; then
   poetry publish
   exit 0
 fi
-{%- endif %}
 
-{% if cookiecutter.github_container_registry_publish %}
 if [[ $command == "publish-ghcr" ]]; then
   debug
   version=$(poetry version --short)
@@ -70,7 +67,6 @@ if [[ $command == "publish-ghcr" ]]; then
   docker push "${image_tag_github}"
   exit 0
 fi
-{%- endif %}
 
 if [[ -z $command ]]; then
   echo "Unknown command: ${command}"
@@ -81,11 +77,7 @@ echo "Commands:"
 echo "  build            -- build the docker image containing the local virtualenv and the application"
 echo "  run              -- run the docker image associated with the current version, passing any arguments"
 echo "  release <type>   -- tag the current revision and bump the version in pyproject.toml"
-{%- if cookiecutter.pypi_publish %}
 echo "  publish-pipy     -- publish the current built artifact to pipy under the current version"
-{%- endif %}
-{%- if cookiecutter.github_container_registry_publish %}
 echo "  publish-ghcr     -- publish the current built Docker image to the GitHub container registry"
-{%- endif %}
 
 exit 1
