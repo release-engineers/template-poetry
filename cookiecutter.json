@@ -5,7 +5,5 @@
   "package_name": "{{ cookiecutter.repo_name.replace('-', '_') }}",
   "github_container_registry_publish": false,
   "github_container_registry_owner": "",
-  "pypi_publish": false,
-  "dockerhub_publish": false,
-  "dockerhub_owner": ""
+  "pypi_publish": false
 }

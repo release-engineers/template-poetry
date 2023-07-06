@@ -69,18 +69,6 @@ if [[ $command == "publish-ghcr" ]]; then
 fi
 {%- endif %}
 
-{% if cookiecutter.dockerhub_publish %}
-if [[ $command == "publish-dockerio" ]]; then
-  debug
-  version=$(poetry version --short)
-  image_tag_local="{{cookiecutter.repo_name}}:${version}"
-  image_tag_dockerhub="{{cookiecutter.dockerhub_owner}}/${image_tag_local}"
-  docker tag "${image_tag_local}" "${image_tag_dockerhub}"
-  docker push "${image_tag_dockerhub}"
-  exit 0
-fi
-{%- endif %}
-
 if [[ -z $command ]]; then
   echo "Unknown command: ${command}"
 fi
@@ -95,9 +83,6 @@ echo "  publish-pipy     -- publish the current built artifact to pipy under the
 {%- endif %}
 {%- if cookiecutter.github_container_registry_publish %}
 echo "  publish-ghcr     -- publish the current built Docker image to the GitHub container registry"
-{%- endif %}
-{%- if cookiecutter.dockerhub_publish %}
-echo "  publish-dockerio -- publish the current built Docker image to Docker Hub"
 {%- endif %}
 
 exit 1
