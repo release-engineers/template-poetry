@@ -46,7 +46,7 @@ if [[ $command == "release" ]]; then
   exit 0
 fi
 
-{%- if cookiecutter.pypi_publish %}
+{% if cookiecutter.pypi_publish %}
 if [[ $command == "publish-pypi" ]]; then
   debug
   poetry publish
@@ -54,7 +54,7 @@ if [[ $command == "publish-pypi" ]]; then
 fi
 {%- endif %}
 
-{%- if cookiecutter.github_container_registry_publish %}
+{% if cookiecutter.github_container_registry_publish %}
 if [[ $command == "publish-ghcr" ]]; then
   debug
   version=$(poetry version --short)
@@ -66,7 +66,7 @@ if [[ $command == "publish-ghcr" ]]; then
 fi
 {%- endif %}
 
-{%- if cookiecutter.dockerhub_publish %}
+{% if cookiecutter.dockerhub_publish %}
 if [[ $command == "publish-dockerio" ]]; then
   debug
   version=$(poetry version --short)
