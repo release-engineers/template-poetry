@@ -12,6 +12,8 @@ function debug() {
   trap 'printf -- "-- \033[0;36m${BASH_COMMAND}\033[0m\n"' DEBUG
 }
 
+command=$1
+
 if [[ $command == "build" ]]; then
   debug
   poetry install --sync
