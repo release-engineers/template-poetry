@@ -1,26 +1,14 @@
 # {{cookiecutter.repo_name}}
 
-Requires:
+## Development
 
-- Docker
+This is a Python Poetry project. See [Poetry](https://python-poetry.org/) for more information.
+
+Development requires:
+
+- Bash
+- [Docker](https://www.docker.com/)
+- [Python](https://www.python.org/)
 - [Poetry](https://python-poetry.org/)
 
-Technologies:
-
-- Python
-- Docker
-- [Poetry](https://python-poetry.org/)
-
-## Build
-
-To build a Docker image tagged `{{cookiecutter.repo_name}}:${version}` (where `${version}` is defined by `pyproject.toml`) run the following;
-
-```bash
-./app.sh build
-```
-
-## Run
-
-```bash
-./app.sh run <args>
-```
+See [`app.sh`](./app.sh) for building, running and releasing the application.
