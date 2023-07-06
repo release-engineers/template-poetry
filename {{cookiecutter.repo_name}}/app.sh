@@ -40,9 +40,9 @@ if [[ $command == "release" ]]; then
     exit 1
   fi
   debug
+  poetry version "${release_type}"
   version=$(poetry version --short)
   git tag "v${version}"
-  poetry version "${release_type}"
   git add pyproject.toml
   git commit --all --message "${release_type} release ${version}"
   git push --tags
