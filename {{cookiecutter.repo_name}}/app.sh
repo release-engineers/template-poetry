@@ -42,9 +42,9 @@ if [[ $command == "release" ]]; then
   debug
   poetry version "${release_type}"
   version=$(poetry version --short)
-  git tag "v${version}"
   git add pyproject.toml
   git commit --all --message "${release_type} release ${version}"
+  git tag "v${version}"
   git push --tags
   exit 0
 fi
@@ -63,6 +63,7 @@ if [[ $command == "publish-ghcr" ]]; then
   version=$(poetry version --short)
   image_tag_local="{{cookiecutter.repo_name}}:${version}"
   image_tag_github="ghcr.io/{{cookiecutter.github_container_registry_owner}}/${image_tag_local}"
+  echo $GITHUB_TOKEN | docker login ghcr.io --username "{{cookiecutter.github_container_registry_owner}}" --password-stdin
   docker tag "${image_tag_local}" "${image_tag_github}"
   docker push "${image_tag_github}"
   exit 0

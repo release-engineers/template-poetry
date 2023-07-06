@@ -1,0 +1,36 @@
+name: Publish to GHCR
+
+on:
+  push:
+    branches-ignore:
+      - "**"
+    tags:
+      - v*
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publish-ghcr:
+    runs-on: ubuntu-latest
+    container: ghcr.io/release-engineers/build-image-poetry:latest
+    steps:
+      - name: Validate tag
+        shell: bash
+        env:
+          GITHUB_REF: ${{ github.ref }}
+        run: |
+          if [[ ! $GITHUB_REF =~ ^refs/tags/ ]]; then
+            echo "$GITHUB_REF is not a tag."
+            exit 1
+          fi
+      - uses: actions/checkout@v3
+      - name: Publish to GHCR
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ./app.sh build
+          ./app.sh publish-ghcr
