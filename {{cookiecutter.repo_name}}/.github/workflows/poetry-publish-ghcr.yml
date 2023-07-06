@@ -14,18 +14,10 @@ permissions:
 
 jobs:
   publish-ghcr:
+    if: startsWith(github.ref, 'refs/tags/')
     runs-on: ubuntu-latest
     container: ghcr.io/release-engineers/build-image-poetry:latest
     steps:
-      - name: Validate tag
-        shell: bash
-        env:
-          GITHUB_REF: ${{ github.ref }}
-        run: |
-          if [[ ! $GITHUB_REF =~ ^refs/tags/ ]]; then
-            echo "$GITHUB_REF is not a tag."
-            exit 1
-          fi
       - uses: actions/checkout@v3
       - name: Publish to GHCR
         shell: bash
