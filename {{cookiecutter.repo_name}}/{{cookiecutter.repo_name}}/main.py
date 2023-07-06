@@ -4,7 +4,7 @@ class CLI(object):
         self.name = name
 
     def hello(self):
-        print(f"Hello {self.name}")
+        return f"Hello {self.name}"
 
     def goodbye(self):
-        print(f"Goodbye {self.name}")
+        return f"Goodbye {self.name}"
