@@ -28,7 +28,7 @@ if [[ $command == "run" ]]; then
   debug
   version=$(poetry version --short)
   shift
-  docker run --rm --tty --interactive --publish 8000:8000 "{{cookiecutter.repo_name}}:${version}" "$@"
+  docker run --rm --publish 8000:8000 "{{cookiecutter.repo_name}}:${version}" "$@"
   exit 0
 fi
 
