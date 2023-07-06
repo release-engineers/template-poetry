@@ -1,5 +1,5 @@
 import fire
-from {{cookiecutter.repo_name}}.main import CLI
+from {{cookiecutter.package_name}}.main import CLI
 
 
 def main():
