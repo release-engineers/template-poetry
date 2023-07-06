@@ -5,7 +5,7 @@
 ## Usage
 
 ```bash
-cookiecutter gh:SkPhilipp/poetry-template
+cookiecutter gh:release-engineers/poetry-template
 ```
 
 ## Technologies
