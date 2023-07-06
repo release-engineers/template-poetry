@@ -18,6 +18,7 @@ if [[ $command == "build" ]]; then
   debug
   poetry install --sync
   poetry build --format wheel
+  poetry run pytest
   version=$(poetry version --short)
   docker build --tag "{{cookiecutter.repo_name}}:${version}" --file Dockerfile .
   exit 0
