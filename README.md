@@ -1,5 +1,7 @@
 # poetry-template
 
+[![Status: Production ready](https://img.shields.io/badge/status-production_ready-green)](https://release-engineers.com/open-source-badges/)
+
 `cookiecutter` template for Python projects using Poetry.
 
 ## Usage
