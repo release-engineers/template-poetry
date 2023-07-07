@@ -2,6 +2,8 @@
 
 # {{cookiecutter.github_owner}}/{{cookiecutter.repo_name}}
 
+[![Status: Alpha](https://img.shields.io/badge/status-alpha-red)](https://release-engineers.com/open-source-badges/)
+
 ## Development
 
 This is a Python Poetry project using [Fire](https://github.com/google/python-fire).
