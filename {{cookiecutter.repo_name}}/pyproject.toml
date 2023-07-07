@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "{{cookiecutter.repo_name}}"
-version = "1.0.0"
+version = "0.0.0"
 description = ""
 authors = ["{{cookiecutter.name}} <{{cookiecutter.email}}>"]
 readme = "README.md"
