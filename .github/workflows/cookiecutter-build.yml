@@ -20,4 +20,5 @@ jobs:
       - name: Build
         shell: bash
         run: |
+          pip install cookiecutter
           ./app.sh build
