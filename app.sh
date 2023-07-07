@@ -23,7 +23,7 @@ if [[ $command == "build" ]]; then
     name="Test" \
     email="test@release-engineers.com" \
     repo_name="demo" \
-    github_container_registry_owner="release-engineers"
+    github_owner="release-engineers"
   # verify that the generated project builds and runs
   (
     cd "${generated_sources}/demo"

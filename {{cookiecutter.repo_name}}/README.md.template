@@ -1,6 +1,6 @@
 <!-- README.md is auto-generated from README.md.template -->
 
-# {{cookiecutter.github_container_registry_owner}}/{{cookiecutter.repo_name}}
+# {{cookiecutter.github_owner}}/{{cookiecutter.repo_name}}
 
 ## Development
 

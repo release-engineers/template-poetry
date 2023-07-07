@@ -3,7 +3,7 @@
   "email": "anonymous@example.com",
   "repo_name": "",
   "package_name": "{{ cookiecutter.repo_name.replace('-', '_') }}",
-  "github_container_registry_owner": "",
+  "github_owner": "",
   "_copy_without_render": [
     ".github/workflows/*"
   ]

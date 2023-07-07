@@ -67,8 +67,8 @@ if [[ $command == "publish-ghcr" ]]; then
   debug
   version=$(poetry version --short)
   image_tag_local="{{cookiecutter.repo_name}}:${version}"
-  image_tag_github="ghcr.io/{{cookiecutter.github_container_registry_owner}}/${image_tag_local}"
-  echo $GITHUB_TOKEN | docker login ghcr.io --username "{{cookiecutter.github_container_registry_owner}}" --password-stdin
+  image_tag_github="ghcr.io/{{cookiecutter.github_owner}}/${image_tag_local}"
+  echo $GITHUB_TOKEN | docker login ghcr.io --username "{{cookiecutter.github_owner}}" --password-stdin
   docker tag "${image_tag_local}" "${image_tag_github}"
   docker push "${image_tag_github}"
   exit 0
