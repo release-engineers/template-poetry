@@ -44,7 +44,7 @@ if [[ $command == "release" ]]; then
   version=$(poetry version --short)
   tag="v${version}"
   git add pyproject.toml
-  git commit --all --message "${release_type} release ${version}"
+  git commit --no-verify --all --message "${release_type} release ${version}"
   git tag "${tag}"
   branch=$(git rev-parse --abbrev-ref HEAD)
   git push --atomic origin "${branch}" "v${version}"
