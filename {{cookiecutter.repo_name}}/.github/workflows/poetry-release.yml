@@ -15,16 +15,20 @@ on:
 
 permissions:
   contents: write
+  packages: write
 
 jobs:
   release:
     runs-on: ubuntu-latest
     container: ghcr.io/release-engineers/build-image-poetry:latest
+    outputs:
+        tag: ${{ steps.release.outputs.release_tag }}
     steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Release
+      - id: release
+        name: Release
         shell: bash
         env:
           RELEASE_TYPE: ${{ github.event.inputs.type }}
@@ -33,3 +37,15 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           ./app.sh release "${RELEASE_TYPE}"
+  publish-ghcr:
+    needs: release
+    uses: ./.github/workflows/poetry-publish-ghcr.yml
+    with:
+      ref: refs/tags/${{ needs.release.outputs.tag }}
+  publish-pypi:
+    needs: release
+    if: vars.PYPI_PUBLISH_ENABLED == 'true'
+    uses: ./.github/workflows/poetry-publish-pypi.yml
+    with:
+      ref: refs/tags/${{ needs.release.outputs.tag }}
+    secrets: inherit

@@ -1,12 +1,19 @@
 name: Publish to GHCR
 
 on:
-  push:
-    branches-ignore:
-      - "**"
-    tags:
-      - v*
+  workflow_call:
+    inputs:
+      ref:
+        type: string
+        description: 'GitHub tag ref'
+        required: true
+        default: 'refs/tags/v0.0.0'
   workflow_dispatch:
+    inputs:
+      ref:
+        type: string
+        description: 'GitHub tag ref'
+        required: true
 
 permissions:
   contents: read
@@ -14,11 +21,13 @@ permissions:
 
 jobs:
   publish-ghcr:
-    if: startsWith(github.ref, 'refs/tags/')
+    if: startsWith(inputs.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
     container: ghcr.io/release-engineers/build-image-poetry:latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.ref }}
       - name: Publish to GHCR
         shell: bash
         env:
@@ -26,3 +35,11 @@ jobs:
         run: |
           ./app.sh build
           ./app.sh publish-ghcr
+  notify-inputs:
+    if: startsWith(inputs.ref, 'refs/tags/v') == false
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          INPUT_REF: ${{ inputs.ref }}
+        run: |
+          echo "'${INPUT_REF}' is not a GitHub tag reference in the format of 'refs/tags/v.*'."

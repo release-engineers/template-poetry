@@ -42,10 +42,16 @@ if [[ $command == "release" ]]; then
   debug
   poetry version "${release_type}"
   version=$(poetry version --short)
+  tag="v${version}"
   git add pyproject.toml
   git commit --all --message "${release_type} release ${version}"
-  git tag "v${version}"
-  git push --tags
+  git tag "${tag}"
+  branch=$(git rev-parse --abbrev-ref HEAD)
+  git push --atomic origin "${branch}" "v${version}"
+  if [[ -n "${GITHUB_ACTIONS}" ]]; then
+    echo "release_version=${version}" | tee -a "${GITHUB_OUTPUT}"
+    echo "release_tag=${tag}" | tee -a "${GITHUB_OUTPUT}"
+  fi
   exit 0
 fi
 
