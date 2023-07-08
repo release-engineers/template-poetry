@@ -16,6 +16,7 @@ command=$1
 
 if [[ $command == "build" ]]; then
   debug
+
   # generate a project from the template
   generated_sources=$(mktemp -d)
   trap 'rm -rf "${generated_sources}"' EXIT
@@ -24,12 +25,12 @@ if [[ $command == "build" ]]; then
     email="test@release-engineers.com" \
     repo_name="demo" \
     github_owner="release-engineers"
+
   # verify that the generated project builds and runs
-  (
-    cd "${generated_sources}/demo"
-    ./app.sh build
-    ./app.sh run hello
-  )
+  cd "${generated_sources}/demo"
+  ./app.sh build
+  ./app.sh run hello
+
   exit 0
 fi
 
