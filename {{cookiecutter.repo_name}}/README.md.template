@@ -20,4 +20,4 @@ See [`app.sh`](./app.sh) for building, running and releasing the application.
 
 ## Links
 
-This project was created using [poetry-template](https://github.com/release-engineers/poetry-template).
+This project was created using [template-poetry](https://github.com/release-engineers/template-poetry).

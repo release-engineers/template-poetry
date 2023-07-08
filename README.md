@@ -1,4 +1,4 @@
-# poetry-template
+# template-poetry
 
 [![Status: Production ready](https://img.shields.io/badge/status-production_ready-green)](https://release-engineers.com/open-source-badges/)
 
@@ -7,7 +7,7 @@
 ## Usage
 
 ```bash
-cookiecutter gh:release-engineers/poetry-template
+cookiecutter gh:release-engineers/template-poetry
 ```
 
 Additionally, if you'd like to publish your package to PyPI through the "Release" GitHub Actions workflow;
